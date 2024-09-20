@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { BASE_PATH_API } from "@/app/_config";
 
 function ItemDescription() {
@@ -55,6 +55,8 @@ function ItemDescription() {
   
 
   return (
+    <Suspense fallback={<div>Cargando...</div>}>
+
     <div className='flex min-h-screen flex-col items-center justify-center bg-gray-100'>
       <div className='w-[1440px] h-[2155px] relative bg-white'>
         <div className='w-[663px] h-[82px] left-[125px] top-[873px] absolute bg-white rounded-[27px] border border-neutral-200' />
@@ -202,6 +204,7 @@ function ItemDescription() {
       </div>
       <Link href='/users/adopter/home'>Volver</Link>
     </div>
+    </Suspense>
   );
 }
 
