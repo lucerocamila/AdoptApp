@@ -1,3 +1,5 @@
+"use client";
+
 import AddPetButton from "@/app/components/AddPetButton";
 import ItemListContainer from "@/app/components/ItemListContainer";
 
