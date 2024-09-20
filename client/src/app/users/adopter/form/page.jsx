@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { ArrowLeft, Upload } from "lucide-react";
 import { BASE_PATH_API } from "@/app/_config";
 import { useRouter, useSearchParams } from "next/navigation";
