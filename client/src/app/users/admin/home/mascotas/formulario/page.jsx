@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { ArrowLeft, Cat, Dog } from "lucide-react";
 import PrimaryButton from "@/app/components/PrimaryButton";
 import { BASE_PATH_API } from "@/app/_config";
@@ -143,6 +143,7 @@ const AddPetForm = () => {
   };
 
   return (
+    <Suspense fallback={<div>Cargando...</div>}>
     <div className='max-w-2xl mx-auto p-4'>
       <div className='flex items-center mb-6'>
         <ArrowLeft className='w-6 h-6 mr-2' />
@@ -352,6 +353,8 @@ const AddPetForm = () => {
         />
       </form>
     </div>
+    </Suspense>
+
   );
 };
 
