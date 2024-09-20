@@ -1,0 +1,99 @@
+paths:
+    /api/file/:
+        post:
+            summary: Subir archivos
+            description: Subir una o más archivos al servidor y obtener las rutas donde se guardan.
+            tags:
+                - Files
+            requestBody:
+                content:
+                    multipart/form-data:
+                        schema:
+                            type: object
+                            properties:
+                                id:
+                                    type: string
+                                    description: Id del usuario, mascota, etc.
+                                files:
+                                    type: array
+                                    items:
+                                        type: string
+                                        format: binary
+                                    description: Archivos a subir.
+                required: true
+            responses:
+                "200":
+                    description: Archivos subidas exitosamente.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    ok:
+                                        type: boolean
+                                        example: true
+                                    message:
+                                        type: string
+                                        example: Files uploaded successfully
+                                    paths:
+                                        type: array
+                                        items:
+                                            type: string
+                                            example: /server/uploads/123file.jpg
+                "500":
+                    description: Error al subir los archivos.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    ok:
+                                        type: boolean
+                                        example: false
+                                    message:
+                                        type: string
+                                        example: Error message
+
+    /api/file:
+        delete:
+            summary: Eliminar un archivo
+            description: Elimina un archivo del servidor según la ruta proporcionada.
+            tags:
+                - Files
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                filePath:
+                                    type: string
+                                    description: Ruta del archivo a eliminar.
+                required: true
+            responses:
+                "200":
+                    description: Archivo eliminada exitosamente.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    ok:
+                                        type: boolean
+                                        example: true
+                                    message:
+                                        type: string
+                                        example: File deleted successfully
+                "500":
+                    description: Error al eliminar el archivo.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    ok:
+                                        type: boolean
+                                        example: false
+                                    message:
+                                        type: string
+                                        example: Error message
