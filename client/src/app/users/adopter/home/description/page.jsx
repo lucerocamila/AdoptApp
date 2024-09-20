@@ -29,18 +29,30 @@ function ItemDescription() {
   };
 
   useEffect(() => {
-    (async () => {
-      const response = await fetch(`${BASE_PATH_API}/pet/${id}`);
-
-      const data = await response.json();
-
-      if (data.ok) {
-        setData(data.pet);
-        setImgs(data.pet.imgs);
-        // console.log(data);
-      }
-    })();
-  }, []);
+    if (id) {
+      setHasPet(true);
+      (async () => {
+        try {
+          const response = await fetch(`${BASE_PATH_API}/pet/${id}`);
+          const data = await response.json();
+  
+          if (data.ok) {
+            const finalData = {
+              ...data.pet,
+              specie: formData.type,
+              continueCreate: true,
+              post: true,
+              category: formData.type + "s",
+            };
+            setFormData(finalData);
+          }
+        } catch (error) {
+          console.error("Error fetching pet data:", error);
+        }
+      })();
+    }
+  }, [id]);
+  
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center bg-gray-100'>
