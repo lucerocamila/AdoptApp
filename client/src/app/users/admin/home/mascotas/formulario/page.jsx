@@ -39,14 +39,13 @@ const AddPetForm = () => {
     router.back();
   };
 
-  if (id) {
-    useEffect(() => {
+  useEffect(() => {
+    if (id) {
       setHasPet(true);
       (async () => {
         const response = await fetch(`${BASE_PATH_API}/pet/${id}`);
-
         const data = await response.json();
-
+  
         if (data.ok) {
           const finalData = {
             ...data.pet,
@@ -58,8 +57,8 @@ const AddPetForm = () => {
           setFormData(finalData);
         }
       })();
-    }, []);
-  }
+    }
+  }, [id]);
 
   const handleFileChange = (e) => {
     const file = e.target.files;
